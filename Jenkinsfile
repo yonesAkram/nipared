@@ -4,8 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh '"docker version
-                         docker ps -a"'                    
+                    sh '''docker version
+                         docker ps -a
+                         '''                    
                 }
             }
         }
