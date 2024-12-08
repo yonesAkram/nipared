@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker version
-                    docker ps
+                        def version = "1.0.0" 
+                        echo "Building version ${version}"
             }
         }
     }
