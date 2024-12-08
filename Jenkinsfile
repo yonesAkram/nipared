@@ -4,10 +4,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                        def version = "1.0.0" 
-                        echo "Building version ${version}"
+                    sh 'docker version'
+                    sh 'docker ps'
+                }
             }
         }
     }
 }
-}
+
