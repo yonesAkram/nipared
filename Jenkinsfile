@@ -1,18 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build And Push Image') {
             steps {
                 script {
-                    sh '''docker version
-                         docker ps -a
-                         docker build -t yonesAkram/nipard:v1.0 .
-                         docker tag nipard:v1.0 yonesAkram/nipard:v1.0
-                         docker push yonesAkram/nipard:v1.0
-                         '''                    
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                             docker build -t yonesAkram/nipard:v1.0 .
+                             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                             docker push yonesAkram/nipard:v1.0
+                             docker ps
+                        '''
+                    }
                 }
             }
         }
     }
 }
 
+
+ 
+    
