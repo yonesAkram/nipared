@@ -10,7 +10,7 @@ pipeline {
                              echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
                              docker push docker.io/yonesakram/nipard:v1.0
                              docker pull docker.io/yonesakram/nipard:v1.0
-                             docker run -d --name nipard-container -p 8081:80 docker.io/yonesakram/nipard:v1.0
+                             docker run -d --name nipard-container -p 8081:3000 docker.io/yonesakram/nipard:v1.0
                              docker ps
                         '''
                     }
